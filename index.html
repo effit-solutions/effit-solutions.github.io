@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EFFIT Solutions | Efficient IT Solutions</title>
+    <!-- Importing Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0a0a0f;
+            --bg-secondary: #111118;
+            --text-color: #ffffff;
+            --text-muted: #94a3b8;
+            --accent-color: #47B2DD; /* Matches your logo blue */
+            --accent-glow: rgba(71, 178, 221, 0.3);
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        /* --- LOGO RECREATION --- */
+        .logo-wrapper {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            padding: 8px 15px;
+            user-select: none;
+        }
+
+        /* Brackets */
+        .logo-wrapper::before, .logo-wrapper::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 12px;
+            border: 2px solid var(--accent-color);
+        }
+
+        .logo-wrapper::before {
+            left: 0;
+            border-right: none;
+        }
+
+        .logo-wrapper::after {
+            right: 0;
+            border-left: none;
+        }
+
+        /* Bottom connecting lines */
+        .bottom-line-left, .bottom-line-right {
+            position: absolute;
+            bottom: 0;
+            height: 2px;
+            width: 20%;
+            background: var(--accent-color);
+        }
+        .bottom-line-left { left: 0; }
+        .bottom-line-right { right: 0; }
+
+        .logo-main {
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: var(--accent-color);
+            letter-spacing: 6px;
+            line-height: 1;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+        }
+
+        .logo-sub {
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: white;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Scaling for Nav */
+        .nav-logo { transform: scale(0.7); transform-origin: left; }
+        .footer-logo { transform: scale(0.8); transform-origin: left; }
+
+        /* --- BACKGROUND & NAV --- */
+        .grid-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background-size: 60px 60px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            z-index: -1;
+            mask-image: radial-gradient(circle at center, black, transparent 80%);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem 10%;
+            align-items: center;
+            position: fixed;
+            top: 0; width: 100%; z-index: 100;
+            backdrop-filter: blur(12px);
+            background: rgba(10, 10, 15, 0.7);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-links { display: flex; gap: 2.5rem; }
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+        .nav-links a:hover { color: var(--accent-color); }
+
+        /* --- HERO --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 10%;
+        }
+
+        .hero-logo-big {
+            transform: scale(1.5);
+            margin-bottom: 4rem;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            margin: 0; font-weight: 900; letter-spacing: -2px; line-height: 1.1;
+        }
+
+        h1 span { color: var(--accent-color); }
+
+        .hero-desc {
+            font-size: 1.15rem; color: var(--text-muted);
+            max-width: 600px; margin: 1.5rem 0 3rem 0; line-height: 1.6;
+        }
+
+        .cta-btn {
+            background-color: transparent;
+            color: var(--accent-color);
+            border: 1px solid var(--accent-color);
+            padding: 1rem 2rem;
+            font-size: 0.9rem; font-weight: 700; border-radius: 4px;
+            cursor: pointer; transition: 0.4s; text-decoration: none;
+        }
+
+        .cta-btn:hover {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            box-shadow: 0 0 30px var(--accent-glow);
+        }
+
+        .cta-btn.solid { background-color: var(--accent-color); color: var(--bg-color); }
+
+        /* --- SECTIONS --- */
+        .section-container { max-width: 1100px; margin: 0 auto; padding: 8rem 2rem; }
+        .section-label { color: var(--accent-color); text-transform: uppercase; letter-spacing: 3px; font-size: 0.75rem; font-weight: 800; margin-bottom: 1rem; }
+        .section-title { font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; letter-spacing: -1.5px; margin-bottom: 1.5rem; }
+
+        .about-section { background-color: var(--bg-secondary); border-top: 1px solid var(--border); }
+
+        .focus-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 3rem; }
+        .focus-card { background: var(--glass); border: 1px solid var(--border); padding: 1.2rem; border-radius: 4px; font-size: 0.95rem; display: flex; align-items: center; gap: 10px; transition: 0.3s; }
+        .focus-card:hover { border-color: var(--accent-color); }
+
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        @media (min-width: 1024px) { .services-grid { grid-template-columns: 1fr 1fr; } }
+
+        .service-card { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 8px; padding: 2.5rem; transition: 0.4s; }
+        .service-card:hover { border-color: var(--accent-color); transform: translateY(-5px); }
+        .service-icon { color: var(--accent-color); margin-bottom: 1.5rem; }
+
+        .service-list { list-style: none; padding: 0; margin-top: 1.5rem; }
+        .service-list li { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 8px; }
+        .service-list li::before { content: ""; width: 4px; height: 4px; background: var(--accent-color); border-radius: 50%; }
+
+        .contact-section { text-align: center; padding: 8rem 2rem; }
+        .phone-link { display: block; margin-top: 1rem; color: var(--text-muted); text-decoration: none; font-size: 1.1rem; transition: 0.3s; }
+        .phone-link:hover { color: var(--accent-color); }
+
+        /* --- FOOTER --- */
+        footer { padding: 5rem 10% 2rem 10%; background: #050507; border-top: 1px solid var(--border); }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 4rem; margin-bottom: 3rem; }
+        .footer-col h4 { margin-bottom: 1.2rem; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+        .footer-col a { display: block; color: var(--text-muted); text-decoration: none; margin-bottom: 0.6rem; font-size: 0.85rem; transition: 0.2s; }
+        .footer-col a:hover { color: var(--accent-color); }
+        .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.8rem; }
+
+        .reveal { opacity: 0; transform: translateY(20px); transition: 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 768px) {
+            nav { padding: 1rem 5%; }
+            .nav-links { display: none; }
+            .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="grid-bg"></div>
+
+    <nav>
+        <div class="nav-logo">
+            <div class="logo-wrapper">
+                <div class="logo-main">EFFIT</div>
+                <div class="logo-sub">SOLUTIONS</div>
+                <div class="bottom-line-left"></div>
+                <div class="bottom-line-right"></div>
+            </div>
+        </div>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <section class="hero reveal">
+        <!-- Main Integrated Logo -->
+        <div class="hero-logo-big">
+            <div class="logo-wrapper">
+                <div class="logo-main">EFFIT</div>
+                <div class="logo-sub" style="font-size: 0.9rem; letter-spacing: 4px;">SOLUTIONS</div>
+                <div class="bottom-line-left"></div>
+                <div class="bottom-line-right"></div>
+            </div>
+        </div>
+
+        <h1>Smart, scalable, and <span>efficient IT.</span></h1>
+        <p class="hero-desc">We build the digital infrastructure that allows your business to move faster and grow further.</p>
+        
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
+            <a href="#services" class="cta-btn solid">View Services</a>
+            <a href="tel:+19295255533" class="cta-btn">Call (929) 525-5533</a>
+        </div>
+    </section>
+
+    <section id="about" class="about-section">
+        <div class="section-container reveal">
+            <div class="section-label">Our Mission</div>
+            <h2 class="section-title">Technology That Fits</h2>
+            <p style="color: var(--text-muted); max-width: 600px; font-size: 1.1rem; line-height: 1.7;">
+                EFFIT Solutions specializes in practical, high-performance IT strategy. We eliminate the friction in your systems so you can focus on your core business goals.
+            </p>
+
+            <div class="focus-grid">
+                <div class="focus-card">Reliable Infrastructure</div>
+                <div class="focus-card">Process Automation</div>
+                <div class="focus-card">Cybersecurity First</div>
+                <div class="focus-card">Scalable Growth</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="section-container reveal">
+        <div class="section-label">Expertise</div>
+        <h2 class="section-title">Core IT Solutions</h2>
+        
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path></svg></div>
+                <h3>Infrastructure & Cloud</h3>
+                <p style="color: var(--text-muted)">Architecting resilient environments for the modern age.</p>
+                <ul class="service-list">
+                    <li>Cloud migrations (AWS/Azure)</li>
+                    <li>Network optimization</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line></svg></div>
+                <h3>Managed Services</h3>
+                <p style="color: var(--text-muted)">Total system care so you never have to worry about downtime.</p>
+                <ul class="service-list">
+                    <li>24/7 Monitoring</li>
+                    <li>Helpdesk support</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></div>
+                <h3>Automation</h3>
+                <p style="color: var(--text-muted)">Turning manual bottlenecks into automated workflows.</p>
+                <ul class="service-list">
+                    <li>Custom API integrations</li>
+                    <li>DevOps pipelines</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div>
+                <h3>Cybersecurity</h3>
+                <p style="color: var(--text-muted)">Enterprise-grade protection for your most sensitive assets.</p>
+                <ul class="service-list">
+                    <li>Security Audits</li>
+                    <li>Threat Management</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section reveal">
+        <div class="section-label">Connect</div>
+        <h2 class="section-title">Ready to optimize?</h2>
+        <a href="mailto:contact@effit.solutions" class="cta-btn solid">Email Us</a>
+        <a href="tel:+19295255533" class="phone-link">(929) 525-5533</a>
+    </section>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <div class="logo-wrapper">
+                        <div class="logo-main">EFFIT</div>
+                        <div class="logo-sub">SOLUTIONS</div>
+                        <div class="bottom-line-left"></div>
+                        <div class="bottom-line-right"></div>
+                    </div>
+                </div>
+                <p style="color: var(--text-muted); margin-top: 1.5rem; font-size: 0.85rem;">Engineered for efficiency.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Services</h4>
+                <a href="#services">Infrastructure</a>
+                <a href="#services">Managed IT</a>
+                <a href="#services">Automation</a>
+            </div>
+            <div class="footer-col">
+                <h4>Support</h4>
+                <a href="mailto:contact@effit.solutions">Email</a>
+                <a href="tel:+19295255533">Phone</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 EFFIT Solutions. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
